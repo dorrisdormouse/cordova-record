@@ -1,4 +1,4 @@
-package com.abstr.recorder;
+package com.abstr.recording;
 
 import org.apache.cordova.*;
 import org.json.JSONArray;
@@ -140,7 +140,7 @@ public class AudioRec extends CordovaPlugin {
 	    		}
 	    		
 	    	}catch(Exception e){
-	    		cllBack.error(e.getMessage()+":"+e.getStackTrace());
+	    		cllBack.error(e.getMessage()+":"+e.getStackTrace().toString());
 	    	}
 	    	
 	}

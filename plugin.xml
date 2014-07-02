@@ -36,7 +36,9 @@
                 <param name="android-package" value="com.abstr.recording.AudioRec"/>
             </feature>
         </config-file>
-
+	<config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+        </config-file>
         <source-file src="src/android/AudioRec.java" target-dir="src/com/abstr/recording/AudioRec" />
     </platform>
 
