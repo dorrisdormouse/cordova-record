@@ -70,8 +70,12 @@ public class AudioRec extends CordovaPlugin {
     private static int[] mSampleRates = new int[] { RECORDER_SAMPLERATE };
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    	callbackContext.success("execute");
+    	Log.d("audiorec","execute");
         if (action.equals("record")) {
-            //fileName = args.getString(0); 
+            //fileName = args.getString(0);
+        	Log.d("audiorec","record");
+        	callbackContext.error("record");
             cllBack = callbackContext;
             this.startRecording();
             return true;
@@ -97,14 +101,12 @@ public class AudioRec extends CordovaPlugin {
         return (file.getAbsolutePath() + "/" + AUDIO_RECORDER_TEMP_FILE);
 }
      public AudioRecord findAudioRecord() {
-    	 Log.i("findAudioRecord","START");
 	        for (int rate : mSampleRates) {
-	        	Log.i("findAudioRecord","sample "+ Integer.toString(rate));
 	            for (short audioFormat : new short[] { RECORDER_AUDIO_ENCODING }) {
 	                for (short channelConfig : new short[] {RECORDER_CHANNELS}) {
 	                    try {
 	                        int bufferSize = AudioRecord.getMinBufferSize(rate, channelConfig, audioFormat);
-	                        Log.i("BufferSize",Integer.toString(bufferSize));
+
 	                        if (bufferSize != AudioRecord.ERROR_BAD_VALUE) {
 	                            // check if we can instantiate and have a success
 	                            AudioRecord recorder = new AudioRecord(MediaRecorder.AudioSource.MIC, rate, channelConfig, audioFormat, bufferSize);
@@ -122,7 +124,6 @@ public class AudioRec extends CordovaPlugin {
 	        //, AudioFormat.CHANNEL_IN_STEREO }
 	    }
 	    private void startRecording(){
-	    	 Log.i("findAudioRecord","STARTING RECORDING");
 	    	try{
 			    	recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,RECORDER_SAMPLERATE, RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING, bufferSize);
 			    	if (recorder.getState() != AudioRecord.STATE_INITIALIZED){
@@ -143,7 +144,8 @@ public class AudioRec extends CordovaPlugin {
 	    		}
 	    		
 	    	}catch(Exception e){
-	    		cllBack.error(e.getMessage()+":"+e.getStackTrace());
+	    		//cllBack.error(e.getMessage()+":"+e.getStackTrace());
+	    		cllBack.error("no rec");
 	    	}
 	    	
 	}
