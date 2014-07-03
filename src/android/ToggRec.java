@@ -345,7 +345,7 @@ public class ToggRec extends CordovaPlugin {
                 	   *          coef. for the volume change background
                 	   *        
                 	   */
-                      uwe=new UnderWaterEffect(file,0.7,0,0,0.8f);
+                     // uwe=new UnderWaterEffect(file,0.7,0,0,0.8f);
                       
                       /**
                 	   * Constructs a low pass filter with a cutoff frequency of <code>freq</code>
