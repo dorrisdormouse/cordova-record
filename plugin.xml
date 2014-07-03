@@ -50,6 +50,7 @@
         <source-file src="src/android/ToggRec.java" target-dir="src/com/abstr/togg/ToggRec" />
 	<source-file src="src/android/AACEncoder.java" target-dir="src/com/todoroo/aacenc" />
 	<lib-file src="src/android/libaac-encoder.so" arch="device" />
+	<lib-file src="src/android/voiceeffect.jar" arch="device" />
     </platform>
 
 </plugin>

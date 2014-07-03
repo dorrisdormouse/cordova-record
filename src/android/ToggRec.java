@@ -51,6 +51,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
+import com.example.voiceeffect.filters.LowPassFilter;
+import com.example.voiceeffect.filters.PitchShifterEffect;
+import com.example.voiceeffect.filters.UnderWaterEffect;
+import com.example.voiceeffect.filters.VocoderEffect;
 
 public class ToggRec extends CordovaPlugin {
     public String fileName = "";
