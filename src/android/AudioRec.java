@@ -70,21 +70,26 @@ public class AudioRec extends CordovaPlugin {
     private static int[] mSampleRates = new int[] { RECORDER_SAMPLERATE };
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-    	callbackContext.success("execute");
-    	Log.d("audiorec","execute");
+    	/*
+    	//callbackContext.success("execute");
+    	//Log.d("audiorec","execute");
         if (action.equals("record")) {
             //fileName = args.getString(0);
         	Log.d("audiorec","record");
         	callbackContext.error("record");
             cllBack = callbackContext;
-            this.startRecording();
+            //this.startRecording();
             return true;
         }else if (action.equals("stoprecord")) {
-        	this.stopRecording();
+        	//this.stopRecording();
         	return true;
         }
         return false;
+        */
+        callbackContext.success(action);
+        return true;
     }
+    /*
     private String getTempFilename(){
 		 String filepath = Environment.getExternalStorageDirectory().getPath();
         File file = new File(filepath,AUDIO_RECORDER_FOLDER);
@@ -206,4 +211,5 @@ public class AudioRec extends CordovaPlugin {
                 }
         }
 }
+*/
 }
