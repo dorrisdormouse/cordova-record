@@ -35,6 +35,7 @@
             <feature name="ToggRec" >
                 <param name="android-package" value="com.abstr.togg.ToggRec"/>
             </feature>
+
         </config-file>
 	<config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.CAMERA"/>
@@ -47,6 +48,7 @@
               <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
         </config-file>
         <source-file src="src/android/ToggRec.java" target-dir="src/com/abstr/togg/ToggRec" />
+	<source-file src="src/android/AACEncoder.java" target-dir="src/com/todoroo/aacenc" />
 	<lib-file src="src/android/libaac-encoder.so" arch="device" />
     </platform>
 
