@@ -150,8 +150,8 @@ public class ToggRec extends CordovaPlugin {
 	    		}
 	    		
 	    	}catch(Exception e){
-	    		//cllBack.error(e.getMessage()+":"+e.getStackTrace());
-	    		cllBack.error("no rec");
+	    		cllBack.error(e.getMessage()+":"+e.getStackTrace());
+	    		//cllBack.error("no rec");
 	    	}
 	    	
 	}
