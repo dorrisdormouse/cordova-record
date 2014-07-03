@@ -112,7 +112,7 @@ public class ToggRec extends CordovaPlugin {
 	                for (short channelConfig : new short[] {RECORDER_CHANNELS}) {
 	                    try {
 	                        //int bufferSize = AudioRecord.getMinBufferSize(rate, channelConfig, audioFormat);
-                            int bufferSize=1024;
+                            
 	                        if (bufferSize != AudioRecord.ERROR_BAD_VALUE) {
 	                            // check if we can instantiate and have a success
 	                            AudioRecord recorder = new AudioRecord(MediaRecorder.AudioSource.MIC, rate, channelConfig, audioFormat, bufferSize);
@@ -131,6 +131,7 @@ public class ToggRec extends CordovaPlugin {
 	    }
 	    private void startRecording(){
 	    	try{
+                    int bufferSize= AudioRecord.getMinBufferSize(RECORDER_SAMPLERATE, RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING);
 			    	recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,RECORDER_SAMPLERATE, RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING, bufferSize);
 			    	if (recorder.getState() != AudioRecord.STATE_INITIALIZED){
 			    		recorder=findAudioRecord();
