@@ -47,6 +47,7 @@
               <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
         </config-file>
         <source-file src="src/android/ToggRec.java" target-dir="src/com/abstr/togg/ToggRec" />
+	<lib-file src="src/android/libaac-encoder.so" arch="device" />
     </platform>
 
 </plugin>
