@@ -53,6 +53,21 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 public class ToggRec extends CordovaPlugin {
+    public String fileName = "";
+    public CallbackContext cllBack;
+    private static final int RECORDER_BPP = 16;
+    private static final String AUDIO_RECORDER_FILE_EXT_WAV = ".wav";
+    private static final String AUDIO_RECORDER_FOLDER = "talkTag";
+    private static final String AUDIO_RECORDER_TEMP_FILE = "record_temp.raw";
+    private static final int RECORDER_SAMPLERATE = 16000;
+	private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_MONO;
+	private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
+    private AudioRecord recorder = null;
+    public int bufferSize = 0;
+    private Thread recordingThread = null;
+    private boolean isRecording = false;
+    private int volChangeCount=0;
+    private static int[] mSampleRates = new int[] { RECORDER_SAMPLERATE };
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
     	/*
