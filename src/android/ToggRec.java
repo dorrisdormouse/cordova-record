@@ -16,7 +16,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.Random;
-
+import com.todoroo.aacenc.AACEncoder;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
