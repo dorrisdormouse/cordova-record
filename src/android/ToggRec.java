@@ -89,4 +89,125 @@ public class ToggRec extends CordovaPlugin {
         callbackContext.success(action);
         return true;
     }
+    private String getTempFilename(){
+		 String filepath = Environment.getExternalStorageDirectory().getPath();
+        File file = new File(filepath,AUDIO_RECORDER_FOLDER);
+        
+        if(!file.exists()){
+                file.mkdirs();
+        }
+        
+        File tempFile = new File(filepath,AUDIO_RECORDER_TEMP_FILE);
+        
+        if(tempFile.exists())
+                tempFile.delete();
+        
+        return (file.getAbsolutePath() + "/" + AUDIO_RECORDER_TEMP_FILE);
+}
+     public AudioRecord findAudioRecord() {
+	        for (int rate : mSampleRates) {
+	            for (short audioFormat : new short[] { RECORDER_AUDIO_ENCODING }) {
+	                for (short channelConfig : new short[] {RECORDER_CHANNELS}) {
+	                    try {
+	                        int bufferSize = AudioRecord.getMinBufferSize(rate, channelConfig, audioFormat);
+
+	                        if (bufferSize != AudioRecord.ERROR_BAD_VALUE) {
+	                            // check if we can instantiate and have a success
+	                            AudioRecord recorder = new AudioRecord(MediaRecorder.AudioSource.MIC, rate, channelConfig, audioFormat, bufferSize);
+
+	                            if (recorder.getState() == AudioRecord.STATE_INITIALIZED)
+	                                return recorder;
+	                        }
+	                    } catch (Exception e) {
+	                        
+	                    }
+	                }
+	            }
+	        }
+	        return null;
+	        //, AudioFormat.CHANNEL_IN_STEREO }
+	    }
+	    private void startRecording(){
+	    	try{
+			    	recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,RECORDER_SAMPLERATE, RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING, bufferSize);
+			    	if (recorder.getState() != AudioRecord.STATE_INITIALIZED){
+			    		recorder=findAudioRecord();
+			    	}
+			    	if (recorder.getState() == AudioRecord.STATE_INITIALIZED){
+			    	    recorder.startRecording();
+			    	    isRecording = true;
+			    	    recordingThread = new Thread(new Runnable() {
+			    	        public void run() {
+			    	            writeAudioDataToFile();
+			    	        }
+			    	    }, "AudioRecorder Thread");
+			    	    recordingThread.start();
+			    	    cllBack.success("RECORDING");
+	    		}else{
+	    			cllBack.error("NOT INIT");
+	    		}
+	    		
+	    	}catch(Exception e){
+	    		//cllBack.error(e.getMessage()+":"+e.getStackTrace());
+	    		cllBack.error("no rec");
+	    	}
+	    	
+	}
+	    private void stopRecording(){
+	    	if (null != recorder) {
+	            isRecording = false;
+	            recorder.stop();
+	            recorder.release();
+	            recorder = null;
+	            recordingThread = null;
+	            cllBack.success("STOP RECORDING");
+            }
+	}
+    private void writeAudioDataToFile(){
+		
+        byte data[] = new byte[bufferSize];
+        String filename = getTempFilename();
+        
+        File file = new File(filename);
+    	if(!file.exists()) { 
+    		try{
+    		file.createNewFile();
+    		}catch(Exception e){
+    		
+    		
+    		}
+    	}
+        
+        FileOutputStream os = null;
+        
+        try {
+                os = new FileOutputStream(filename);
+        } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+        }
+        
+        int read = 0;
+        
+        if(null != os){
+        	
+                while(isRecording){
+                        read = recorder.read(data, 0, bufferSize);
+                        
+                        if(AudioRecord.ERROR_INVALID_OPERATION != read){
+                                try {
+                                	    os.write(data);
+                                } catch (IOException e) {
+                                        e.printStackTrace();
+                                }
+                        }
+                }
+                
+                try {
+                        os.close();
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+        }
+}
 }
