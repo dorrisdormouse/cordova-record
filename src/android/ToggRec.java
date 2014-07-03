@@ -310,6 +310,7 @@ public class ToggRec extends CordovaPlugin {
                       break;
                  case 4:
                  	//open underwater.wav. (16bit,mono, 44100,pcm)---it is very important
+                     /*
                  	AssetFileDescriptor descriptor = getAssets().openFd("underwater.wav");
                  	File file = new File(Environment.getExternalStorageDirectory().getPath()+"/"+AUDIO_RECORDER_FOLDER+"/underwater.wav");
                  	if(!file.exists()) { 
@@ -325,6 +326,7 @@ public class ToggRec extends CordovaPlugin {
 	                        fis.close();
 	                        fos.close();
                  	}
+                    */
                  	//File file = createFileFromInputStream(descriptor.createInputStream());
                      //String filepath = Environment.getExternalStorageDirectory().getPath()+"/"+AUDIO_RECORDER_FOLDER+"/underwater.wav";                        
                      //File file = new File(filepath);
