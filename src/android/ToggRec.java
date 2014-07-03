@@ -130,6 +130,7 @@ public class ToggRec extends CordovaPlugin {
 	        //, AudioFormat.CHANNEL_IN_STEREO }
 	    }
 	    private void startRecording(){
+            
 	    	try{
                     int bufferSize= AudioRecord.getMinBufferSize(RECORDER_SAMPLERATE, RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING);
 			    	recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,RECORDER_SAMPLERATE, RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING, bufferSize);
@@ -145,6 +146,7 @@ public class ToggRec extends CordovaPlugin {
 			    	        }
 			    	    }, "AudioRecorder Thread");
 			    	    recordingThread.start();
+                        Log.d("audiorec","START RECORDING");
 			    	    cllBack.success("RECORDING");
 	    		}else{
 	    			cllBack.error("NOT INIT");
@@ -159,6 +161,7 @@ public class ToggRec extends CordovaPlugin {
 	}
 	    private void stopRecording(){
 	    	if (null != recorder) {
+                Log.d("audiorec","STOP RECORDING");
 	            isRecording = false;
 	            recorder.stop();
 	            recorder.release();
@@ -200,6 +203,7 @@ public class ToggRec extends CordovaPlugin {
                         
                         if(AudioRecord.ERROR_INVALID_OPERATION != read){
                                 try {
+                                     Log.d("audiorec","WRITING TO DISK");
                                 	    os.write(data);
                                 } catch (IOException e) {
                                         e.printStackTrace();
