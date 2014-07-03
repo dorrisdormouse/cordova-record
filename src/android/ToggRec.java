@@ -203,7 +203,7 @@ public class ToggRec extends CordovaPlugin {
                         
                         if(AudioRecord.ERROR_INVALID_OPERATION != read){
                                 try {
-                                     Log.d("audiorec","WRITING TO DISK");
+                                     //Log.d("audiorec","WRITING TO DISK");
                                 	    os.write(data);
                                 } catch (IOException e) {
                                         e.printStackTrace();
