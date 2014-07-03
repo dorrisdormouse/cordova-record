@@ -150,6 +150,7 @@ public class ToggRec extends CordovaPlugin {
 	    		}
 	    		
 	    	}catch(Exception e){
+                Log.d("audiorec",e.getMessage()+":"+e.getStackTrace());
 	    		cllBack.error(e.getMessage()+":"+e.getStackTrace());
 	    		//cllBack.error("no rec");
 	    	}
